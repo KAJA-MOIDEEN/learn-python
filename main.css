@@ -1,0 +1,38 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: azure;
+}
+
+.continer{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    /* grid-template-columns: repeat(3 ,2fr) ; */
+    /* grid-template-columns: 1fr 1fr 1fr 1fr ;  */
+    /* grid-template-columns: 1fr 2fr 2fr 1fr; */
+    /* grid-template-columns: repeat(auto-fit, minmax(200px,1fr)) */
+    grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+    /* grid-template-columns: max-content ; */
+    /* grid-template-columns: min-content; */
+
+    
+}
+
+.para{
+    padding: 1rem;
+    background-color: aquamarine;
+    color: black;
+    font-weight: 900;
+    gap: 20px;
+    text-align: center;
+    align-content: center;
+}
+
+.outer-box{
+    display: grid;
+}
+.box{
+    background-color: black;
+    color: white;
+}
