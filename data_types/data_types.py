@@ -19,12 +19,16 @@ is_admin = False # boolean
 
 # 5.List: Ordered and mutable collections, allowing duplicates.
 fruits = ["apple","orange","banana"] # list string
+vegitable = ["onion","onion"]
+fruits.append("banana")
+fruits.extend(vegitable)
+print("from",fruits)
 numbers = [1,2,3,4,5,6] #  list integer
 both = [1,2,"three","four",5,6] # list  mixed data type
 duplicate = [1,2,2,1,3,3]  # list duplicate data type its alows duplicate data type witch is repeted in list
 
 # Creating a list
-fruits = ["apple", "banana", "cherry", "apple"]
+fruits = ["apple", "banana", "cherry", "apple","apple"]
 
 # Accessing elements by index
 first_fruit = fruits[0]  # Output: "apple"
@@ -83,5 +87,8 @@ del person["job"]
 print(person)
 
 # 8.Sets: Unordered collections of unique elements.
-unique_number = {1,2,3,3,2,1}
-print(unique_number)
+unique_number = {1,2,3,3,2,1} # automatically removes duplicates
+print(unique_number) 
+unique_number.add("kaja")  # adding a string to the set
+unique_number.add("moideen")
+print(unique_number)                     
