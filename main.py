@@ -123,13 +123,20 @@
     #     i+=1
 name = "kaja moideen moideen kaja  moideen"
 
-print("name "+ name)
-print("name",name)
-x = name.encode()
-print(len(x))
-print(name.find("m"))
-b = "kaja"
-a = [1,2,3,4,5,6,7,8,9]
-print(b.count(""))
+# print("name "+ name)
+# print("name",name)
+# x = name.encode()
+# print(len(x))
+# print(name.find("m"))
+# b = "kaja"
+# a = [1,2,3,4,5,6,7,8,9]
+# print(b.count(""))
 
-print("1"+"")
+# print("1"+"")
+name = "{:UserName:f}".format(input("Enter your name"))
+email = "{:Email:f}".format(input("Enter your email"))
+phone = "{:Phone:f}".format(input("Enter your phone number"))
+
+print(name)
+print(email)
+print(phone)
