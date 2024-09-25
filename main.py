@@ -121,4 +121,15 @@
     # while i<11:
     #     print(i)
     #     i+=1
-    
+name = "kaja moideen moideen kaja  moideen"
+
+print("name "+ name)
+print("name",name)
+x = name.encode()
+print(len(x))
+print(name.find("m"))
+b = "kaja"
+a = [1,2,3,4,5,6,7,8,9]
+print(b.count(""))
+
+print("1"+"")
