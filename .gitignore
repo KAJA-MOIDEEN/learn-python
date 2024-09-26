@@ -1,3 +1,4 @@
 ATM_PROJECT/build
 ATM_PROJECT/dist
 .venv
+node_modules
