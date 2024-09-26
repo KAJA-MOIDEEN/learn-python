@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu</title>
+</head>
+<body class="bg-gray-100 p-4">
+    <h1 class="text-center text-3xl font-bold mb-6">Restaurant Menu</h1>
+    
+    <div id="menu" class="mb-6"></div>
+    
+    <h2 class="text-xl font-semibold">Add a Menu Item</h2>
+    <form id="add-item-form" class="mb-4">
+        <label for="name" class="block">Item Name:</label>
+        <input type="text" id="name" class="border rounded px-2 py-1" required><br><br>
+        <label for="price" class="block">Price:</label>
+        <input type="number" step="0.01" id="price" class="border rounded px-2 py-1" required><br><br>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add Item</button>
+    </form>
+    
+    <h2 class="text-xl font-semibold">Remove a Menu Item</h2>
+    <form id="remove-item-form">
+        <label for="remove-name" class="block">Item Name:</label>
+        <input type="text" id="remove-name" class="border rounded px-2 py-1" required><br><br>
+        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Remove Item</button>
+    </form>
+</body>
+<script>
+    function loadMenu() {
+    const menuDiv = document.getElementById('menu');
+    menuDiv.innerHTML = '<h2>Loading...</h2>'; // Loading indicator
+    fetch('/menu')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            menuDiv.innerHTML = '<h2>Menu Items</h2>';
+            if (data.length === 0) {
+                menuDiv.innerHTML += '<p>No items in the menu.</p>';
+            } else {
+                data.forEach(item => {
+                    menuDiv.innerHTML += `<div class="menu-item">${item.name}: $${item.price.toFixed(2)}</div>`;
+                });
+            }
+        })
+        .catch(error => {
+            menuDiv.innerHTML = `<p>Error loading menu: ${error.message}</p>`;
+        });
+}
+</script>
+</html>

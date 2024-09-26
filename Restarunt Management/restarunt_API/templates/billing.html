@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Billing</h1>
+    
+    <form id="billing-form">
+        <label for="table-number">Enter Table Number:</label>
+        <input type="number" id="table-number" required><br><br>
+        <button type="submit">Generate Bill</button>
+    </form>
+    
+    <div id="bill"></div>
+    
+    <script>
+        // Fetch and display the bill
+        document.getElementById('billing-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const tableNumber = parseInt(document.getElementById('table-number').value);
+            
+            fetch(`/bill/${tableNumber}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.total) {
+                        let billDetails = `<h2>Bill for Table ${data.table_number}</h2><ul>`;
+                        data.items.forEach(item => {
+                            billDetails += `<li>${item.name} x${item.quantity}: $${item.price.toFixed(2)}</li>`;
+                        });
+                        billDetails += `</ul><h3>Total: $${data.total.toFixed(2)}</h3>`;
+                        document.getElementById('bill').innerHTML = billDetails;
+                    } else {
+                        document.getElementById('bill').innerHTML = '<p>No order found for this table.</p>';
+                    }
+                });
+        });
+    </script>
+</body>
+</html>

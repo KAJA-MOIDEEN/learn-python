@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Orders</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Current Orders</h1>
+    
+    <div id="orders"></div>
+    
+    <script>
+        // Fetch and display current orders
+        function loadOrders() {
+            fetch('/orders')
+                .then(response => response.json())
+                .then(data => {
+                    const ordersDiv = document.getElementById('orders');
+                    ordersDiv.innerHTML = '';
+                    if (data.length === 0) {
+                        ordersDiv.innerHTML = '<p>No current orders.</p>';
+                    } else {
+                        data.forEach(order => {
+                            let orderDetails = `<h3>Table ${order.table_number}</h3><ul>`;
+                            order.items.forEach(item => {
+                                orderDetails += `<li>${item.name} x${item.quantity}</li>`;
+                            });
+                            orderDetails += '</ul>';
+                            ordersDiv.innerHTML += orderDetails;
+                        });
+                    }
+                });
+        }
+
+        loadOrders();
+    </script>
+</body>
+</html>

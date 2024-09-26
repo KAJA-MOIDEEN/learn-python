@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4; /* Light background for contrast */
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.navbar {
+    background-image: url('your-background-image.jpg'); /* Path to your background image */
+    background-size: cover; /* Cover the entire navbar */
+    background-position: center; /* Center the background image */
+    padding: 10px 0; /* Space above and below the navbar */
+}
+
+.navbar ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    text-align: center; /* Center the list items */
+}
+
+.navbar li {
+    display: inline; /* Display list items in a single line */
+    margin: 0 15px; /* Space between items */
+}
+
+.navbar a {
+    text-decoration: none; /* Remove underline from links */
+    color: white; /* White text color */
+    font-weight: bold; /* Bold text */
+    padding: 8px 15px; /* Space around links */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.navbar a:hover {
+    background-color: rgba(255, 255, 255, 0.3); /* Light background on hover */
+}

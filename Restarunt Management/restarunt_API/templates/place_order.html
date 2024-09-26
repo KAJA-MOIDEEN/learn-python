@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place an Order</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Place an Order</h1>
+    
+    <div id="menu"></div>
+    
+    <h2>Your Order</h2>
+    <form id="order-form">
+        <label for="table-number">Table Number:</label>
+        <input type="number" id="table-number" required><br><br>
+        <div id="order-items"></div>
+        <button type="submit">Place Order</button>
+    </form>
+    
+    <script>
+        let menuItems = [];
+        let orderItems = [];
+
+        // Fetch and display the menu
+        function loadMenu() {
+            fetch('/menu')
+                .then(response => response.json())
+                .then(data => {
+                    menuItems = data;
+                    const menuDiv = document.getElementById('menu');
+                    menuDiv.innerHTML = '<h2>Menu Items</h2>';
+                    data.forEach(item => {
+                        menuDiv.innerHTML += `
+                            <div>
+                                <input type="checkbox" name="menu-item" value="${item.name}"> ${item.name} - $${item.price.toFixed(2)}
+                            </div>`;
+                    });
+                });
+        }
+
+        // Add selected items to order
+        document.getElementById('menu').addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('input[name="menu-item"]:checked');
+            const selectedItems = Array.from(checkboxes).map(cb => cb.value);
+            const orderDiv = document.getElementById('order-items');
+            orderDiv.innerHTML = '';
+            selectedItems.forEach(itemName => {
+                orderDiv.innerHTML += `
+                    <div>
+                        ${itemName} - Quantity: <input type="number" id="quantity-${itemName}" value="1" min="1">
+                    </div>`;
+            });
+        });
+
+        // Place order
+        document.getElementById('order-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const tableNumber = parseInt(document.getElementById('table-number').value);
+            const checkboxes = document.querySelectorAll('input[name="menu-item"]:checked');
+            const order = Array.from(checkboxes).map(cb => {
+                const quantity = parseInt(document.getElementById(`quantity-${cb.value}`).value);
+                return { name: cb.value, quantity: quantity };
+            });
+            
+            fetch('/order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ table_number: tableNumber, items: order })
+            }).then(() => {
+                alert('Order placed successfully!');
+                document.getElementById('order-form').reset();
+                document.getElementById('order-items').innerHTML = '';
+            });
+        });
+
+        loadMenu();
+    </script>
+</body>
+</html>
