@@ -7,3 +7,5 @@ Restarunt Management/dist
 Restarunt Management/A2B.spec
 Restarunt Management/A2B.zip
 flask/Google-Credential.json
+.env
+single_sign-on
